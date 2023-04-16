@@ -187,7 +187,7 @@ def ui_fragments():
 
 
 def ui_model():
-    models = ['gpt-3.5-turbo', 'text-davinci-003', 'text-curie-001']
+    models = ['gpt-4', 'gpt-3.5-turbo', 'text-davinci-003', 'text-curie-001']
     st.selectbox('main model', models, key='model',
                  disabled=not ss.get('api_key'))
     # FOR FUTURE USE
