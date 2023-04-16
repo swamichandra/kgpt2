@@ -21,6 +21,7 @@ st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
 header1 = st.empty()  # for errors / messages
 header2 = st.empty()  # for errors / messages
 header3 = st.empty()  # for errors / messages
+st.write('## ❇️ GPT on your Document')
 
 if 'cache' not in st.session_state:
     st.session_state['cache'] = {}
@@ -32,7 +33,7 @@ if 'cache' not in st.session_state:
 
 
 def on_api_key_change():
-    api_key = ss.get('api_key') or os.getenv('OPENAI_KEY')
+    api_key = ss.get('api_key') or st.secrets["OPENAI_API_KEY"]
     model.use_key(api_key)  # TODO: empty api_key
     #
     if 'data_dict' not in ss:
@@ -66,8 +67,8 @@ def ui_spacer(n=2, line=False, next_n=0):
 
 
 def ui_info():
-    st.markdown(f"""
-	# GPT on your Document
+    st.code(f"""
+	
 	version {__version__}
 	
 	Question answering system built on top of GPT.
@@ -92,15 +93,17 @@ def ui_api_key():
             st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change,
                           label_visibility="collapsed", value=st.secrets["OPENAI_API_KEY"])
     else:
-        st.write('## 1. Enter your OpenAI API key')
+        print("Using my own OpenAI Key")
+        st.write('##### 0. Enter your OpenAI API key')
         st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change,
-                      label_visibility="collapsed",)
+                    label_visibility="collapsed", value=st.secrets["OPENAI_API_KEY"], disabled=False)
 
 
 def index_pdf_file():
     if ss['pdf_file']:
         ss['filename'] = ss['pdf_file'].name
         #st.write(ss)
+        on_api_key_change()
         if ss['filename'] != ss.get('fielname_done'):  # UGLY
             with st.spinner(f'indexing {ss["filename"]}'):
                 index = model.index_file(
@@ -125,7 +128,7 @@ def debug_index():
 
 
 def ui_pdf_file():
-    st.write('## 2. Upload or select your PDF file')
+    st.write('##### 1. Upload or select your PDF file')
     # disabled = not ss.get('user') or (not ss.get('api_key') and not ss.get('community_pct',0))
     disabled = False
     t1, t2 = st.tabs(['UPLOAD', 'SELECT'])
@@ -214,10 +217,10 @@ def ui_hyde_prompt():
 
 
 def ui_question():
-    st.write('## 3. Ask questions' +
+    st.write('##### 2. Ask questions' +
              (f' to {ss["filename"]}' if ss.get('filename') else ''))
     disabled = False
-    st.text_area('question', key='question', height=100, placeholder='Enter question here',
+    st.text_area('question', key='question', height=100, placeholder='Provide a summary of this document', value='Provide a summary of this document',
                  help='', label_visibility="collapsed", disabled=disabled)
 
 # REF: Hypotetical Document Embeddings
@@ -241,16 +244,16 @@ def ui_debug():
 
 def b_ask():
     c1, c2, c3, c4, c5 = st.columns([2, 1, 1, 2, 2])
-    if c2.button('👍', use_container_width=True, disabled=not ss.get('output')):
-        ss['feedback'].send(+1, ss, details=ss['send_details'])
-        ss['feedback_score'] = ss['feedback'].get_score()
-    if c3.button('👎', use_container_width=True, disabled=not ss.get('output')):
-        ss['feedback'].send(-1, ss, details=ss['send_details'])
-        ss['feedback_score'] = ss['feedback'].get_score()
+    #if c2.button('👍', use_container_width=True, disabled=not ss.get('output')):
+    #    ss['feedback'].send(+1, ss, details=ss['send_details'])
+    #    ss['feedback_score'] = ss['feedback'].get_score()
+    #if c3.button('👎', use_container_width=True, disabled=not ss.get('output')):
+    #    ss['feedback'].send(-1, ss, details=ss['send_details'])
+    #    ss['feedback_score'] = ss['feedback'].get_score()
     score = ss.get('feedback_score', 0)
-    c5.write(f'feedback score: {score}')
-    c4.checkbox('send details', True, key='send_details',
-                help='allow question and the answer to be stored in the ask-my-pdf feedback database')
+    #c5.write(f'feedback score: {score}')
+    #c4.checkbox('send details', True, key='send_details',
+    #            help='allow question and the answer to be stored in the ask-my-pdf feedback database')
     # c1,c2,c3 = st.columns([1,3,1])
     # c2.radio('zzz',['👍',r'...',r'👎'],horizontal=True,label_visibility="collapsed")
     #
