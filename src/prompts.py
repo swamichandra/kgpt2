@@ -5,12 +5,10 @@
 TASK = {
 	'v6': (
 			"Given the following extracted parts of a long document and a question, create a final answer with references ('SOURCES'). "
-   			"Answer usingr bullet points. "
+   			"Answer using bullet points. "
 			"Answer the question truthfully using the provided context. If you are not sure of the answer, say 'Sorry, I don\'t know'. "
    			"ALWAYS include a 'SOURCES' section in the answer. Include verbatim quote and where to find it in the text (page number). "
-			#"After the quote write a step by step explanation in a new paragraph. "
-			"After the explanation check if the Answer is consistent with the Context and doesn't require external knowledge. "
-			#"After that try to rephrase the original question so it might give better results. " 
+			#"After the explanation check if the Answer is consistent with the Context and doesn't require external knowledge. "
 		),
 	'v5': (
 			"Answer the question truthfully based on the text below. "
