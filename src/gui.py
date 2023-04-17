@@ -26,6 +26,18 @@ st.write('## ❇️ GPT on your Document')
 if 'cache' not in st.session_state:
     st.session_state['cache'] = {}
 
+# Add css to hide item with title "Show password text"
+st.markdown(
+    """
+<style>
+    [title="Show password text"] {
+        display: none;
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 # IMPORTS
 
 
