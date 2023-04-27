@@ -37,7 +37,6 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-
 # IMPORTS
 
 
@@ -79,7 +78,7 @@ def ui_spacer(n=2, line=False, next_n=0):
 
 
 def ui_info():
-    st.code(f"""
+    st.write(f"""
 	
 	version {__version__}
 	
@@ -360,9 +359,9 @@ def output_add(q, a):
 
 
 with st.sidebar:
-    ui_info()
-    ui_spacer(2)
-    with st.expander('advanced'):
+    #ui_info()
+    #ui_spacer(2)
+    with st.expander('Advanced Config'):
         ui_show_debug()
         b_clear()
         ui_model()
