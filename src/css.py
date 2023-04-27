@@ -1,12 +1,9 @@
 v1 = """
-/* feedback checkbox */
-.css-18fuwiq {
- position: relative;
- padding-top: 6px;
-}
-.css-949r0i {
- position: relative;
- padding-top: 6px;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+    color: #091747;
 }
 
 """
