@@ -13,7 +13,8 @@ app_name = "GPT on yor Documents"
 
 # BOILERPLATE
 
-st.set_page_config(layout='centered', page_title=f'{app_name} {__version__}')
+#st.set_page_config(layout='centered', page_title=f'{app_name} {__version__}')
+st.set_page_config(page_title="Use Generative AI on your own Documents", page_icon=":random:", layout="wide")
 ss = st.session_state
 if 'debug' not in ss:
     ss['debug'] = {}
