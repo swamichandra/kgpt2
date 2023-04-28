@@ -19,10 +19,11 @@ ss = st.session_state
 if 'debug' not in ss:
     ss['debug'] = {}
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
+
 header1 = st.empty()  # for errors / messages
 header2 = st.empty()  # for errors / messages
 header3 = st.empty()  # for errors / messages
-st.write('## ❇️ GPT on your Document')
+st.write('## 🗃️ GPT on your Document')
 
 if 'cache' not in st.session_state:
     st.session_state['cache'] = {}
@@ -42,8 +43,6 @@ st.markdown(
 
 
 # HANDLERS
-
-
 def on_api_key_change():
     api_key = ss.get('api_key') or st.secrets["OPENAI_API_KEY"]
     model.use_key(api_key)  # TODO: empty api_key
@@ -79,12 +78,12 @@ def ui_spacer(n=2, line=False, next_n=0):
 
 
 def ui_info():
-    st.write(f"""
-	
-	version {__version__}
-	
-	Question answering system built on top of GPT.
-	""")
+    st.markdown(f"""
+    <p style='font-size: 10px'>
+	This app demonstrates how to use OpenAI's GPT to answer questions on your own document, by using document embeddings and retrieval. When you upload a document, it will be divided into smaller chunks and stored in a vector index that allows for semantic search and retrieval. When you ask a question, the app will search through the document chunks and find the most relevant ones using the vector index. Then, it will use GPT to generate a final answer.
+	""",
+    unsafe_allow_html=True,)
+    #ui_spacer()
 
 
 def ui_api_key():
@@ -360,7 +359,7 @@ def output_add(q, a):
 
 
 with st.sidebar:
-    #ui_info()
+    ui_info()
     #ui_spacer(2)
     with st.expander('Advanced Config'):
         ui_show_debug()
