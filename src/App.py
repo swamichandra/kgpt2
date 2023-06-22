@@ -244,7 +244,7 @@ def ui_question():
     st.write('##### 2. Ask questions' +
              (f' to {ss["filename"]}' if ss.get('filename') else ''))
     disabled = False
-    st.text_area('question', key='question', height=100, placeholder='Provide a summary of this document', value='Provide a summary of this document in 5 bullet points',
+    st.text_area('question', key='question', height=100, placeholder='What are the key takeaways from this document? Then provide a summary of this document in 5 bullet points', value='What are the key takeaways from this document? Then provide a summary of this document in 5 bullet points.',
                  help='', label_visibility="collapsed", disabled=disabled)
 
 # REF: Hypotetical Document Embeddings
